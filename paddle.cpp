@@ -39,41 +39,50 @@ void paddle::setPoint(point p)
 
 void paddle::move_paddle()
 {
-	keytype kType2;
 	char cKeyData;
+	keytype kType;
+	pGame->getWind()->FlushKeyQueue();
+	pGame->getWind()->SetPen(LAVENDER, 1);
+	pGame->getWind()->SetBrush(LAVENDER);
+	
 
-	kType2 = pGame->getWind()->GetKeyPress(cKeyData);
-	pGame->getWind()->SetPen(config.bkGrndColor, 1);
-	pGame->getWind()->SetBrush(config.bkGrndColor);
+	// Loop until there escape is pressed
+	
+		kType = pGame->getWind()->GetKeyPress(cKeyData);
 
-	if (kType2 == ARROW)
-	{
-		switch (cKeyData)
+		if (kType == ARROW)
 		{
-		case 4: // right arrow
-			if (paddlePos.x > 10) {
-				paddlePos.x -= 40;
-				pGame->getWind()->DrawRectangle(0, config.remainingHeight, config.windWidth, config.paddleAreaHeight, FILLED);
-				setPoint(paddlePos);
-			}
-			break;
+			switch (cKeyData)
+			{
+			case 4:	//left Arrow
+				if (uprLft.x > 10)
+				{
+					pGame->getPaddle()->uprLft.x -= 15;
 
-		case 6:
-			// Move paddle right
-			if (paddlePos.x < config.windWidth - 200) {
-				paddlePos.x += 40;
-				pGame->getWind()->DrawRectangle(0, config.remainingHeight, config.windWidth, config.paddleAreaHeight, FILLED);
-				setPoint(paddlePos);
+					//drawing a rectangle that has the same color as the background
+
+					//w->DrawRectangle(prePos.x, prePos.y, config.windWidth, height);
+					pGame->getWind()->DrawRectangle(0, 500, config.windWidth, 380);
+					//w.UpdateBuffer();
+				}
+				break;
+			case 6:	//right Arrow
+				if (uprLft.x < config.windWidth - width - 10)
+				{
+					pGame->getPaddle()->uprLft.x += 15;
+
+					//drawing a rectangle that has the same color as the background
+
+					//w->DrawRectangle(prePos.x, prePos.y, config.windWidth, height);
+					pGame->getWind()->DrawRectangle(0, 500, config.windWidth, 380);
+					//w.UpdateBuffer();
+				}
+				break;
 			}
-			break;
+
 		}
-
-		//updated paddle
-		draw();
-	}
-
-
-	pGame->getWind()->UpdateBuffer();
+		this->draw();
+		pGame->getWind()->UpdateBuffer();
 }
 
 

@@ -97,7 +97,7 @@ void grid::deleteBrick(point clickedPoint)
 	point newBrickPos;
 	newBrickPos.x = uprLft.x + gridCellColIndex * config.brickWidth;
 	newBrickPos.y = uprLft.y + gridCellRowIndex * config.brickHeight;
-	cout << newBrickPos.x << endl << newBrickPos.y << endl;
+	
 
 	if (brickMatrix[gridCellRowIndex][gridCellColIndex] != nullptr) {
 		delete brickMatrix[gridCellRowIndex][gridCellColIndex];

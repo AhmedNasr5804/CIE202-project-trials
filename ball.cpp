@@ -27,22 +27,20 @@ void ball::draw() const
 
 void ball::move()
 {
-	paddle* pPaddle = pGame->getPaddle();
-	window* pWind = pGame->getWind();
-	pWind->SetBuffering(true);
+	
+	//pGame->getWind() ->SetBuffering(true);
 
 	char cKeyData;
 	keytype kType1;
 
-	int BallCenterX = (config.windHeight / 2) + 240;
-	int BallCenterY = (config.paddleAreaHeight) + 280;
+	
 
-	point paddlePoint = pPaddle->getPoint();
+	point paddlePoint = pGame->getPaddle()->getPoint();
 
-	pWind->FlushKeyQueue();
-	kType1 = pWind->GetKeyPress(cKeyData);
+	pGame->getWind()->FlushKeyQueue();
+	kType1 = pGame->getWind()->GetKeyPress(cKeyData);
 
-	auto PaddleBallCollision = isColliding(this, pPaddle);
+	auto PaddleBallCollision = isColliding(this, pGame->getPaddle());
 
 	uprLft.x = Xinc;
 	uprLft.y = Yinc;
@@ -65,7 +63,7 @@ void ball::move()
 	if(PaddleBallCollision.collision)
 	{
 		Yinc = -abs(Yinc);
-		double paddleCenterX = (pPaddle->getPoint().x + (pPaddle->getPoint().x + radius)) / 2.0;
+		double paddleCenterX = (pGame->getPaddle()->getPoint().x + (pGame->getPaddle()->getPoint().x + radius)) / 2.0;
 		double offset = (uprLft.x - paddleCenterX) / (config.paddleWidth / 2.0);
 
 		const double maxBounceAngle = 45.0;
@@ -80,20 +78,20 @@ void ball::move()
 	}
 
 	//draw the game elements
-	pWind->SetPen(LAVENDER, 1);
-	pWind->SetBrush(LAVENDER);
-	pWind->DrawRectangle(0, 0, config.windWidth, config.windHeight, FILLED);
+	pGame->getWind()->SetPen(LAVENDER, 1);
+	pGame->getWind()->SetBrush(LAVENDER);
+	pGame->getWind()->DrawRectangle(0, 0, config.windWidth, config.windHeight, FILLED);
 	pGame->getGrid()->draw();
 	pGame->getToolBar()->draw();
-	pPaddle->draw();
-	pWind->SetPen(config.statusBarColor, 1);
-	pWind->SetBrush(config.statusBarColor);
-	pWind->DrawRectangle(0, config.windHeight - config.statusBarHeight, config.windWidth, config.windHeight);
-	pWind->SetPen(BLACK, 1);
-	pWind->SetBrush(BLACK);
+	pGame->getPaddle()->draw();
+	pGame->getWind()->SetPen(config.statusBarColor, 1);
+	pGame->getWind()->SetBrush(config.statusBarColor);
+	pGame->getWind()->DrawRectangle(0, config.windHeight - config.statusBarHeight, config.windWidth, config.windHeight);
+	pGame->getWind()->SetPen(BLACK, 1);
+	pGame->getWind()->SetBrush(BLACK);
 
-	pWind->DrawString(config.windWidth / 2, config.windHeight - config.statusBarHeight, "Score : " + to_string(config.scores));
-	pWind->DrawString(config.windWidth / 2 + 500, config.windHeight - config.statusBarHeight, "Lives : " + to_string(config.lives));
+	pGame->getWind()->DrawString(config.windWidth / 2, config.windHeight - config.statusBarHeight, "Score : " + to_string(config.scores));
+	pGame->getWind()->DrawString(config.windWidth / 2 + 500, config.windHeight - config.statusBarHeight, "Lives : " + to_string(config.lives));
 	this->draw();
 
 	//moving the paddle with the ball at the same time thats why there are two key types
@@ -105,14 +103,5 @@ void ball::setPoint(point p)
 	uprLft = p;
 }
 
-//collidable::points ball::getAllpoints() const
-//{
-//	points axis;
-//	axis.upperLeft.x = uprLft.x - radius;
-//	axis.upperLeft.y = uprLft.y - radius;
-//	axis.lowerRight.x = uprLft.x + radius;
-//	axis.lowerRight.y = uprLft.y + radius;
-//	return axis;
-//}
 
 

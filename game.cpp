@@ -1,5 +1,6 @@
 #include "game.h"
 #include "gameConfig.h"
+#include "CMUgraphicsLib/auxil.h"
 
 
 void game::updateGameTime()
@@ -227,7 +228,7 @@ void game::go()
 				{
 					gameToolbar->handleClick(x, y);
 				}
-
+				
 				gameBall->move();
 				gamePaddle->move_paddle();
 			} while (isPlay && !isPause);
