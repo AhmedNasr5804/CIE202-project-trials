@@ -5,6 +5,7 @@
 //Base class for all collidable (objects that may collide with other objects)
 class collidable :public drawable
 {
+protected:
     struct collisionData
     {
         bool collision = false;
@@ -17,6 +18,7 @@ public:
     virtual void collisionAction() = 0;    //action that should be performed upon collision
     collisionData isColliding(const collidable* obj1, const collidable* obj2) const;
 
+    point getPoint();
 };
 
 

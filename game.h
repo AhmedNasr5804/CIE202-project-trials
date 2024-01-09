@@ -3,23 +3,24 @@
 #include "toolbar.h"
 #include "grid.h"
 #include "paddle.h"
-#include"ball.h"
-#include<chrono>
-using namespace std;
+#include "ball.h"
+#include <chrono>
 
 
 
 //Main class that coordinates the game operation
+enum MODE	//Game mode
+{
+	MODE_DSIGN,	//Desing mode (startup mode)
+	MODE_PLAY	//Playing mode
+};
 class game
 {
-
-
-
-
 	/// Add more members if needed
 	bool isPlay;
 	bool isPause;
 	bool isExit;
+	bool isStop;
 
 	
 	window* pWind;	//Pointer to the CMU graphics window
@@ -40,11 +41,6 @@ public:
 	game();
 	~game();
 
-	enum MODE	//Game mode
-	{
-		MODE_DSIGN,	//Desing mode (startup mode)
-		MODE_PLAY	//Playing mode
-	};
 
 	MODE gameMode;
 
@@ -69,15 +65,19 @@ public:
 	grid* getGrid() const;
 	paddle* getPaddle() const;
 	toolbar* getToolBar() const;
+	ball* getBall() const;
+	MODE getMode()const;
 
 	void updateGameTime();
 	void updateScore(int p);
 	void decrementLives();
 	void updateGameInfo(); //to update the game time, live and score
+	void updateTime(double i, double j) const;
 
 	void  setMode(MODE mode);
 	void setPlay(bool play);
 	void setExit(bool exit);
 	void setPause(bool pause);
+	void setStop(bool stop);
 };
 

@@ -6,7 +6,8 @@
 enum BrickType	//add more brick types
 {
 	BRK_NRM,	//Normal Brick
-	BRK_HRD		//Hard Brick
+	BRK_HRD,
+	BRK_BOMB	//Hard Brick
 
 	//TODO: Add more types
 };
@@ -15,9 +16,22 @@ enum BrickType	//add more brick types
 //Base class for all bricks
 class brick :public collidable
 {
+private:
+	BrickType bt;
+	int strenth;
 public:
 	brick(point r_uprleft, int r_width, int r_height, game* r_pGame);
 
+	BrickType getType();
+	void setType(BrickType brk);
+
+	int getStrength();
+	void setStrength(int s);
+	void decStrength();
+	BrickType getbricktype() const;
+	point getPoint();
+	int On_Collision();
+	void collisionAction();
 };
 
 
@@ -37,6 +51,32 @@ public:
 	void collisionAction();
 };
 
+//////////////////////////////////////////////////////  class bombBrick  /////////////////////////////////
+class bombBrick :public brick
+{
+public:
+	bombBrick(point r_uprleft, int r_width, int r_height, game* r_pGame);
+	void collisionAction();
+};
 
 
-#ya allah
+
+/////////////////////////////////////////////////// class powerup ////////////////////////////////////////////
+class PowerBrick :public brick
+{
+
+public:
+
+	PowerBrick(point r_uprleft, int r_width, int r_height, game * r_pGame);
+	void collisionAction();
+};
+
+
+///////////////////////////////////////////////// rock brick ///////////////////////////////////////////////////
+
+class rockBrick :public brick
+{
+public:
+	rockBrick(point r_uprleft, int r_width, int r_height, game* r_pGame);
+	void collisionAction();
+};

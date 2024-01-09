@@ -18,6 +18,13 @@ public:
 	void draw() const;
 	int addBrick(BrickType brkType, point clickedPoint);
 	void deleteBrick(point clickedPoint);
+	void destroy(brick* brk);
+
+	brick*** getBrickMatrix();
+	int getrows()const;
+	int getcols()const;
+
+	int arethereremainingbricks();
 
 };
 

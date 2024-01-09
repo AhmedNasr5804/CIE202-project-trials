@@ -46,22 +46,21 @@ game::game()
 	
 	//4- Create the Paddle
 	//TODO: Add code to create and draw the paddle
-	point paddleUpperLeft;
-	paddleUpperLeft.x = (config.windWidth / 2) + (config.paddleWidth/2) - 210;
-	paddleUpperLeft.y = config.paddleAreaHeight + 300;
-	gamePaddle = new paddle(paddleUpperLeft, config.paddleWidth, config.paddleHeight, this);
-	gamePaddle->draw();
+	point paddleUpperleft;
+	paddleUpperleft.x = (config.windWidth / 2) - (config.paddleWidth / 2);
+	paddleUpperleft.y = config.paddleAreaHeight;
+	gamePaddle = new paddle(paddleUpperleft, config.paddleWidth, config.paddleHeight, this);
+	
 
 	//5- Create the ball
 	//TODO: Add code to create and draw the ball
-	point BallUpperLeft;
-	BallUpperLeft.x = (config.windHeight / 2) + 240;
-	BallUpperLeft.y = (config.paddleAreaHeight)  +  280;
-	gameBall = new ball(BallUpperLeft, config.ballRadius, config.ballRadius, this);
-	gameBall->draw();
+	point ballUpperleft;
+	ballUpperleft.x = (config.windWidth / 2) - (config.ballRadius);
+	ballUpperleft.y = config.paddleAreaHeight - config.ballRadius *1;
+	gameBall = new ball(ballUpperleft, config.ballrectX1 + config.ballRadius *2, config.ballrectY1 + config.ballRadius *2, this);
 	
 	//6- Create and clear the status bar
-	clearStatusBar();
+	/*clearStatusBar();*/
 }
 
 game::~game()
@@ -107,6 +106,19 @@ void game::printMessage(string msg) const	//Prints a message on status bar
 	pWind->SetFont(32, BOLD, BY_NAME, "Arial");
 	pWind->DrawString(10, config.windHeight - (int)(0.85 * config.statusBarHeight), msg);
 }
+
+//void game::playStatusBar() const	//Prints a message on status bar
+//{
+//	clearStatusBar();	//First clear the status bar
+//
+//	pWind->SetPen(config.penColor, 50);
+//	pWind->SetFont(24, BOLD, BY_NAME, "Arial");
+//	pWind->DrawString(10, config.windHeight - (int)(0.85 * config.statusBarHeight), "SCORE:");
+//	pWind->DrawInteger(95, config.windHeight - (int)(0.85 * config.statusBarHeight), gameToolbar->getScore());
+//	pWind->DrawString((config.windWidth / 2) - 10, config.windHeight - (int)(0.85 * config.statusBarHeight), "LIVES:");
+//	pWind->DrawInteger((config.windWidth / 2) + 60, config.windHeight - (int)(0.85 * config.statusBarHeight), gameToolbar->getLives());
+//	pWind->DrawString(config.windWidth - 150, config.windHeight - (int)(0.85 * config.statusBarHeight), "TIME:");
+//}
 
 
 
@@ -157,6 +169,16 @@ toolbar* game::getToolBar() const
 	return gameToolbar;
 }
 
+ball* game::getBall() const
+{
+	return gameBall;
+}
+
+MODE game::getMode() const
+{
+	return gameMode;
+}
+
 void game::updateGameInfo() 
 {
 	updateGameTime();
@@ -167,6 +189,30 @@ void game::updateGameInfo()
 		updateScore(20);
 
 	pWind->DrawString(600, 0, "lives: ");
+
+}
+
+void game::updateTime(double i, double j) const
+{
+
+	string minutes[11] = { "10","09","08","07","06","05","04","03","02","01","00" };
+	string seconds[60] = { "59","58","57","56","55","54","53","52","51","50",
+						  "49","48","47","46","45","44","43","42","41","40",
+						  "39","38","37","36","35","34","33","32","31","30",
+						  "29","28","27","26","25","24","23","22","21","20",
+						  "19","18","17","16","15","14","13","12","11","10",
+						  "09","08","07","06","05","04","03","02","01","00",
+	};
+	if (seconds[int(j)] == "00") {
+		config.i++;
+		config.j = 0;
+	}
+	else {
+		config.i = config.i;
+	}
+	pWind->SetPen(config.penColor, 50);
+	pWind->SetFont(24, BOLD, BY_NAME, "Arial");
+	pWind->DrawString(config.windWidth - 75, config.windHeight - (int)(0.85 * config.statusBarHeight), minutes[int(i)] + ":" + seconds[int(j)]);
 
 }
 
@@ -190,24 +236,33 @@ void game::setPause(bool pause)
 	isPause = pause;
 }
 
+void game::setStop(bool stop)
+{
+	isStop = stop;
+}
+
 
 ////////////////////////////////////////////////////////////////////////
 void game::go()
 {
 	//This function reads the position where the user clicks to determine the desired operation
 	int x, y;
-	char c;
+	bool isExit = false;
+
+	
 
 	//Change the title
 	pWind->ChangeTitle("- - - - - - - - - - Brick Breaker (CIE202-project) - - - - - - - - - -");
 	
 	do
 	{
+		
 		updateGameInfo();
 
 		printMessage("Ready...");
 		getMouseClick(x, y);	//Get the coordinates of the user click
-
+		
+		
 
 		if (gameMode == MODE_DSIGN)		//Game is in the Desgin mode
 		{
@@ -216,25 +271,69 @@ void game::go()
 			{
 				isExit=gameToolbar->handleClick(x, y);
 			}
+			
 		}
-
-		if(gameMode == MODE_PLAY)
+		else if (gameMode == MODE_PLAY)
 		{
-			do
-			{
-				pWind->GetMouseClick(x, y);
 
-				if ((y>=0 && y < config.toolBarHeight)&& x>330)
-				{
-					gameToolbar->handleClick(x, y);
-				}
-				
-				gameBall->move();
-				gamePaddle->move_paddle();
-			} while (isPlay && !isPause);
+			gamePaddle->draw();
+			gameBall->draw();
+			pWind->FlushKeyQueue();
+			keytype Q;
+			char Cha;
+			Q = pWind->WaitKeyPress(Cha);
+			if (Q == ASCII && Cha == ' ') {
+				do {
+					config.j += 0.03;
 
-			gameMode = MODE_DSIGN;
+					//playStatusBar();
+					updateTime(config.i, config.j);
+					gameBall->ballstart();
+					gamePaddle->move_paddle();
+					//gameToolbar->Timer();
+					//pWind->DrawInteger(1075, config.toolBarHeight / 2, gameToolbar->getSeconds());
+					//if (gameToolbar->getMinutes() != 0) {
+					//	pWind->DrawInteger(1125, config.toolBarHeight / 2, gameToolbar->getMinutes());
+					//}
+					pWind->GetMouseClick(x, y);
+					if (y > 0 && y <= config.toolBarHeight && x < config.iconWidth * 7) {
+						gameToolbar->handleClick(x, y);
+					}
+				} while (isPlay);
+
+			}
+
+
+
+		} while (!isExit);
+	
+
+		//if ball crosses lower edge lives decrement by 1
+
+		if (gameBall->getPoint().y + 20 > config.paddleAreaHeight)
+		{
+			lives--;
 		}
+
+		//if lives got delepted endgame
+
+		if (lives == 0)
+		{
+			isPlay = false;
+			printMessage("you lose! gameover	your score:  " + score);
+		}
+
+		int remainingbricks = bricksGrid->arethereremainingbricks();
+
+		if (remainingbricks == 0)
+		{
+			isPlay = false;
+			printMessage("you win! gameover		your score:  " + score);
+		}
+
+		pWind->UpdateBuffer();
 
 	} while (!isExit);
+
+
 }

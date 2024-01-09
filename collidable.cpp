@@ -40,3 +40,9 @@ collidable::collisionData collidable::isColliding(const collidable* obj1, const 
 	return data;
 
 }
+
+point collidable::getPoint()
+{
+	return uprLft;
+}
+

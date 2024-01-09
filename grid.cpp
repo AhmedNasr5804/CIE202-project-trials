@@ -1,6 +1,7 @@
 #include "grid.h"
 #include "game.h"
 #include "gameConfig.h"
+#include <fstream>
 
 grid::grid(point r_uprleft, int wdth, int hght, game* pG):
 	drawable(r_uprleft, wdth, hght, pG)
@@ -103,8 +104,124 @@ void grid::deleteBrick(point clickedPoint)
 		delete brickMatrix[gridCellRowIndex][gridCellColIndex];
 		brickMatrix[gridCellRowIndex][gridCellColIndex] = nullptr;
 		pGame->getWind()->SetPen(LAVENDER, 1);
-		pGame->getWind()->SetBrush(LAVENDER);
+		pGame->getWind()->SetBrush(RED);
 		pGame->getWind()->DrawRectangle(newBrickPos.x, newBrickPos.y, newBrickPos.x + config.brickWidth, newBrickPos.y + config.brickHeight, FILLED);
 	}
 
 }
+
+void grid::destroy(brick* brk)
+{
+	BrickType type = brk->getType();
+	
+	int r = (uprLft.y - uprLft.y) / config.brickHeight;
+	int c = uprLft.x / config.brickWidth;
+
+	switch (type)
+	{
+	case BRK_NRM:
+	case BRK_HRD:
+
+		delete brickMatrix[r][c];
+		brickMatrix[r][c] = nullptr;
+		pGame->getWind()->SetPen(LAVENDER, 1);
+		pGame->getWind()->SetBrush(RED);
+		pGame->getWind()->DrawRectangle(brk->getPoint().x, brk->getPoint().y, brk->getPoint().x + config.brickWidth, brk->getPoint().y + config.brickHeight, FILLED);
+	
+		break;
+	case BRK_BMB:
+		destroy(brickMatrix[r + 1][c]);
+		destroy(brickMatrix[r - 1][c]);
+		destroy(brickMatrix[r][c + 1]);
+		destroy(brickMatrix[r][c - 1]);
+		delete brickMatrix[r][c];
+		brickMatrix[r][c] = nullptr;
+	}
+
+
+}
+
+brick*** grid::getBrickMatrix()
+{
+	return brickMatrix;
+}
+
+int grid::getrows() const
+{
+	return rows;
+}
+
+int grid::getcols() const
+{
+	return cols;
+}
+
+int grid::arethereremainingbricks()
+{
+	int remainingbricks = 0;
+	for (int i = 0; i < rows; i++)
+		for (int j = 0; j < cols; j++)
+			if (brickMatrix[i][j] != nullptr)
+				remainingbricks++;
+	return remainingbricks;
+
+}
+
+//void grid::save()
+//{
+//	ofstream infile;
+//	infile.open("save.txt");
+//
+//	grid* pGrid = pGame->getGrid();
+//
+//	brick*** gameBrickMatrix = pGrid->getBrickMatrix();
+//
+//	int type;
+//	for (int i = 0; i<rows;i++)
+//		for (int j = 0; j<cols;j++)
+//		{
+//			if(gameBrickMatrix[i][j] != nullptr)
+//			{
+//				infile << i+1 << " ";
+//				infile << j+1 << " ";
+//				type = int(gameBrickMatrix[i][j]->getType());
+//				infile << type<<endl;
+//			}
+//		}
+//	infile.close();
+//}
+
+//void grid::load()
+//{
+//	
+//		pGame->printMessage("Loading File... ==> Right-Click to stop <==");
+//		ifstream infile;
+//		grid* pGrid = pGame->getGrid();
+//		infile.open("save.txt");
+//		if (infile.is_open())
+//		{
+//
+//			pGrid->draw();
+//
+//			// Load bricks from file
+//			int i, j, type;
+//			while (infile >> i >> j >> type)
+//			{
+//				// Add bricks to the grid
+//				point uplft;
+//				uplft.x = (j - 1) * config.brickWidth;
+//				uplft.y = (i - 1) * config.brickHeight;
+//				BrickType bt = BrickType(type);
+//				pGrid->addBrick(bt, uplft);
+//			}
+//
+//			infile.close();
+//		}
+//		else
+//		{
+//			pGame->printMessage("Failed to open the file for loading.");
+//		}
+//}
+
+
+

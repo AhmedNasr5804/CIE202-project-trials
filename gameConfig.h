@@ -37,4 +37,10 @@ struct 		//contains all game configurations (MAY be loaded from a configuration 
 
 	int scores = 0;
 	int lives = 3;
+	int i = 1; double j = 0;
+
+	int ballrectX1 = (windWidth / 2) - (ballRadius);
+	int ballrectX2 = ballrectX1 + (ballRadius * 2);
+	int ballrectY1 = paddleAreaHeight - (ballRadius * 2);
+	int ballrectY2 = ballrectY1 + (ballRadius*2);
 }config;

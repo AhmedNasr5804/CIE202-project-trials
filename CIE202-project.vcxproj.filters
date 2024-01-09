@@ -123,6 +123,7 @@
     </ClCompile>
     <ClCompile Include="paddle.cpp" />
     <ClCompile Include="ball.cpp" />
+    <ClCompile Include="collective.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -202,6 +203,7 @@
     </ClInclude>
     <ClInclude Include="paddle.h" />
     <ClInclude Include="ball.h" />
+    <ClInclude Include="collective.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Base Classes">
@@ -219,5 +221,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="save.txt" />
+    <Text Include="load.txt" />
   </ItemGroup>
 </Project>
