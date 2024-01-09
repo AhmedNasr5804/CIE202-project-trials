@@ -135,6 +135,8 @@ void bombBrick::collisionAction()
 		else
 		{
 			pGame->getGrid()->destroy(this);
+			config.scores++;
+
 		}
 	}
 }

@@ -108,7 +108,6 @@ void paddle::draw()
 	window* pWind = pGame->getWind();
 	pWind->SetBrush(BLACK);
 	pWind->SetPen(BLUEVIOLET);
-	//pWind->DrawRectangle(500,530,(500+config.paddleWidth),(530+config.paddleHight));
 	pWind->DrawRectangle(uprLft.x, uprLft.y - 40, (uprLft.x + width), (uprLft.y + height - 40), FILLED);
 }
 void paddle::collisionAction()
@@ -119,7 +118,6 @@ void paddle::collisionAction()
 void paddle::move_paddle()
 {
 	window* pWind = pGame->getWind();
-	//paddle::draw();
 	char cKeyData;
 	keytype kType;
 	int speed = 10;
