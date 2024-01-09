@@ -1,7 +1,4 @@
 #include "Bricks.h"
-
-
-#include "ball.h"
 #include "game.h"
 #include "gameConfig.h"
 
@@ -68,9 +65,7 @@ normalBrick::normalBrick(point r_uprleft, int r_width, int r_height, game* r_pGa
 
 void normalBrick::collisionAction()
 {
-	ball* b = pGame->getBall();
-
-	auto collide = isColliding(this, b);
+	auto collide = isColliding(this, pGame->getBall());
 
 	if(collide.collision)
 	{
@@ -99,9 +94,7 @@ hardBrick::hardBrick(point r_uprleft, int r_width, int r_height, game* r_pGame) 
 
 void hardBrick::collisionAction()
 {
-	ball* b = pGame->getBall();
-
-	auto collide = isColliding(this, b);
+	auto collide = isColliding(this, pGame->getBall());
 
 	if (collide.collision)
 	{
@@ -130,9 +123,7 @@ bombBrick::bombBrick(point r_uprleft, int r_width, int r_height, game* r_pGame) 
 
 void bombBrick::collisionAction()
 {
-	ball* b = pGame->getBall();
-
-	auto collide = isColliding(this, b);
+	auto collide = isColliding(this, pGame->getBall());
 
 	if (collide.collision)
 	{
@@ -148,28 +139,3 @@ void bombBrick::collisionAction()
 	}
 }
 
-////////////////////////////////////// powerup bricks ///////////////////////////////////////////////
-
-PowerBrick::PowerBrick(point r_uprleft, int r_width, int r_height, game* r_pGame) :
-	brick(r_uprleft, r_width, r_height, r_pGame)
-{
-	imageName = "images\\bricks\\NormalBrick.jpg";
-}
-
-void PowerBrick::collisionAction()
-{
-
-}
-
-/////////////////////////////////// rock brick //////////////////////////////////////////////////
-
-rockBrick::rockBrick(point r_uprleft, int r_width, int r_height, game* r_pGame) :
-	brick(r_uprleft, r_width, r_height, r_pGame)
-{
-	imageName = "images\\bricks\\hardBrick.jpg";
-}
-
-void rockBrick::collisionAction()
-{
-
-}

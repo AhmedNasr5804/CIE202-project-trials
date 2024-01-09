@@ -17,13 +17,14 @@
 
 #pragma once
 #include "collidable.h"
+
 class paddle : public collidable
 {
-	collective* power;
+	/*collective* power;*/
 public:
 	paddle(point r_uprleft, int paddleWidth, int paddleHight, game* r_pGame);
 	void draw();
-	void collisionAction();
+	void collisionAction() override;
 	void move_paddle();
 	point getPoint();
 	void setPoint(point p);

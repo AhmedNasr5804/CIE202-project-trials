@@ -1,6 +1,6 @@
 #include "game.h"
 #include "gameConfig.h"
-#include "CMUgraphicsLib/auxil.h"
+
 
 
 void game::updateGameTime()
@@ -323,13 +323,13 @@ void game::go()
 			printMessage("you lose! gameover	your score:  " + score);
 		}
 
-		int remainingbricks = bricksGrid->arethereremainingbricks();
+		/*int remainingbricks = bricksGrid->arethereremainingbricks();
 
 		if (remainingbricks == 0)
 		{
 			isPlay = false;
 			printMessage("you win! gameover		your score:  " + score);
-		}
+		}*/
 
 		pWind->UpdateBuffer();
 

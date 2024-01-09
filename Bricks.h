@@ -60,23 +60,3 @@ public:
 };
 
 
-
-/////////////////////////////////////////////////// class powerup ////////////////////////////////////////////
-class PowerBrick :public brick
-{
-
-public:
-
-	PowerBrick(point r_uprleft, int r_width, int r_height, game * r_pGame);
-	void collisionAction();
-};
-
-
-///////////////////////////////////////////////// rock brick ///////////////////////////////////////////////////
-
-class rockBrick :public brick
-{
-public:
-	rockBrick(point r_uprleft, int r_width, int r_height, game* r_pGame);
-	void collisionAction();
-};

@@ -96,7 +96,6 @@
 #include "paddle.h"
 #include "game.h"
 #include "gameConfig.h"
-#include "CMUgraphicsLib/auxil.h"
 
 
 paddle::paddle(point r_uprleft, int paddleWidth, int paddleHight, game* r_pGame) :
@@ -141,318 +140,318 @@ void paddle::move_paddle()
 	paddle::draw();
 	pWind->UpdateBuffer();
 
-	switch (power->get_type())
-	{
-	case fireball:
-		kType = pGame->getWind()->GetKeyPress(cKeyData);
+	//switch (power->get_type())
+	//{
+	//case fireball:
+	//	kType = pGame->getWind()->GetKeyPress(cKeyData);
 
-		if (kType == ARROW)
-		{
-			switch (cKeyData)
-			{
-			case 4:	//left Arrow
-				if (uprLft.x > 10)
-				{
-					pGame->getPaddle()->uprLft.x -= 15;
+	//	if (kType == ARROW)
+	//	{
+	//		switch (cKeyData)
+	//		{
+	//		case 4:	//left Arrow
+	//			if (uprLft.x > 10)
+	//			{
+	//				pGame->getPaddle()->uprLft.x -= 15;
 
-					//drawing a rectangle that has the same color as the background
+	//				//drawing a rectangle that has the same color as the background
 
-					//w->DrawRectangle(prePos.x, prePos.y, config.windWidth, height);
-					pGame->getWind()->DrawRectangle(0, 500, config.windWidth, 380);
-					//w.UpdateBuffer();
-				}
-				break;
-			case 6:	//right Arrow
-				if (uprLft.x < config.windWidth - width - 10)
-				{
-					pGame->getPaddle()->uprLft.x += 15;
+	//				//w->DrawRectangle(prePos.x, prePos.y, config.windWidth, height);
+	//				pGame->getWind()->DrawRectangle(0, 500, config.windWidth, 380);
+	//				//w.UpdateBuffer();
+	//			}
+	//			break;
+	//		case 6:	//right Arrow
+	//			if (uprLft.x < config.windWidth - width - 10)
+	//			{
+	//				pGame->getPaddle()->uprLft.x += 15;
 
-					//drawing a rectangle that has the same color as the background
+	//				//drawing a rectangle that has the same color as the background
 
-					//w->DrawRectangle(prePos.x, prePos.y, config.windWidth, height);
-					pGame->getWind()->DrawRectangle(0, 500, config.windWidth, 380);
-					//w.UpdateBuffer();
-				}
-				break;
-			}
-		}
+	//				//w->DrawRectangle(prePos.x, prePos.y, config.windWidth, height);
+	//				pGame->getWind()->DrawRectangle(0, 500, config.windWidth, 380);
+	//				//w.UpdateBuffer();
+	//			}
+	//			break;
+	//		}
+	//	}
 
-		this->draw();
-		pGame->getWind()->UpdateBuffer();
-		break;
-	case Magnet:
-		kType = pGame->getWind()->GetKeyPress(cKeyData);
+	//	this->draw();
+	//	pGame->getWind()->UpdateBuffer();
+	//	break;
+	//case Magnet:
+	//	kType = pGame->getWind()->GetKeyPress(cKeyData);
 
-		if (kType == ARROW)
-		{
-			switch (cKeyData)
-			{
-			case 4:	//left Arrow
-				if (uprLft.x > 10)
-				{
-					pGame->getPaddle()->uprLft.x -= 15;
+	//	if (kType == ARROW)
+	//	{
+	//		switch (cKeyData)
+	//		{
+	//		case 4:	//left Arrow
+	//			if (uprLft.x > 10)
+	//			{
+	//				pGame->getPaddle()->uprLft.x -= 15;
 
-					//drawing a rectangle that has the same color as the background
+	//				//drawing a rectangle that has the same color as the background
 
-					//w->DrawRectangle(prePos.x, prePos.y, config.windWidth, height);
-					pGame->getWind()->DrawRectangle(0, 500, config.windWidth, 380);
-					//w.UpdateBuffer();
-				}
-				break;
-			case 6:	//right Arrow
-				if (uprLft.x < config.windWidth - width - 10)
-				{
-					pGame->getPaddle()->uprLft.x += 15;
+	//				//w->DrawRectangle(prePos.x, prePos.y, config.windWidth, height);
+	//				pGame->getWind()->DrawRectangle(0, 500, config.windWidth, 380);
+	//				//w.UpdateBuffer();
+	//			}
+	//			break;
+	//		case 6:	//right Arrow
+	//			if (uprLft.x < config.windWidth - width - 10)
+	//			{
+	//				pGame->getPaddle()->uprLft.x += 15;
 
-					//drawing a rectangle that has the same color as the background
+	//				//drawing a rectangle that has the same color as the background
 
-					//w->DrawRectangle(prePos.x, prePos.y, config.windWidth, height);
-					pGame->getWind()->DrawRectangle(0, 500, config.windWidth, 380);
-					//w.UpdateBuffer();
-				}
-				break;
-			}
-		}
+	//				//w->DrawRectangle(prePos.x, prePos.y, config.windWidth, height);
+	//				pGame->getWind()->DrawRectangle(0, 500, config.windWidth, 380);
+	//				//w.UpdateBuffer();
+	//			}
+	//			break;
+	//		}
+	//	}
 
-		this->draw();
-		pGame->getWind()->UpdateBuffer();
-		break;
-	case MultipleBalls:
-		kType = pGame->getWind()->GetKeyPress(cKeyData);
+	//	this->draw();
+	//	pGame->getWind()->UpdateBuffer();
+	//	break;
+	//case MultipleBalls:
+	//	kType = pGame->getWind()->GetKeyPress(cKeyData);
 
-		if (kType == ARROW)
-		{
-			switch (cKeyData)
-			{
-			case 4:	//left Arrow
-				if (uprLft.x > 10)
-				{
-					pGame->getPaddle()->uprLft.x -= 15;
+	//	if (kType == ARROW)
+	//	{
+	//		switch (cKeyData)
+	//		{
+	//		case 4:	//left Arrow
+	//			if (uprLft.x > 10)
+	//			{
+	//				pGame->getPaddle()->uprLft.x -= 15;
 
-					//drawing a rectangle that has the same color as the background
+	//				//drawing a rectangle that has the same color as the background
 
-					//w->DrawRectangle(prePos.x, prePos.y, config.windWidth, height);
-					pGame->getWind()->DrawRectangle(0, 500, config.windWidth, 380);
-					//w.UpdateBuffer();
-				}
-				break;
-			case 6:	//right Arrow
-				if (uprLft.x < config.windWidth - width - 10)
-				{
-					pGame->getPaddle()->uprLft.x += 15;
+	//				//w->DrawRectangle(prePos.x, prePos.y, config.windWidth, height);
+	//				pGame->getWind()->DrawRectangle(0, 500, config.windWidth, 380);
+	//				//w.UpdateBuffer();
+	//			}
+	//			break;
+	//		case 6:	//right Arrow
+	//			if (uprLft.x < config.windWidth - width - 10)
+	//			{
+	//				pGame->getPaddle()->uprLft.x += 15;
 
-					//drawing a rectangle that has the same color as the background
+	//				//drawing a rectangle that has the same color as the background
 
-					//w->DrawRectangle(prePos.x, prePos.y, config.windWidth, height);
-					pGame->getWind()->DrawRectangle(0, 500, config.windWidth, 380);
-					//w.UpdateBuffer();
-				}
-				break;
-			}
-		}
+	//				//w->DrawRectangle(prePos.x, prePos.y, config.windWidth, height);
+	//				pGame->getWind()->DrawRectangle(0, 500, config.windWidth, 380);
+	//				//w.UpdateBuffer();
+	//			}
+	//			break;
+	//		}
+	//	}
 
-		this->draw();
-		pGame->getWind()->UpdateBuffer();
-		break;
+	//	this->draw();
+	//	pGame->getWind()->UpdateBuffer();
+	//	break;
 
-	case WindGlade:
-		kType = pGame->getWind()->GetKeyPress(cKeyData);
+	//case WindGlade:
+	//	kType = pGame->getWind()->GetKeyPress(cKeyData);
 
-		if (kType == ARROW)
-		{
-			switch (cKeyData)
-			{
-			case 4:	//left Arrow
-				if (uprLft.x > 10)
-				{
-					pGame->getPaddle()->uprLft.x -= 30;
+	//	if (kType == ARROW)
+	//	{
+	//		switch (cKeyData)
+	//		{
+	//		case 4:	//left Arrow
+	//			if (uprLft.x > 10)
+	//			{
+	//				pGame->getPaddle()->uprLft.x -= 30;
 
-					//drawing a rectangle that has the same color as the background
+	//				//drawing a rectangle that has the same color as the background
 
-					//w->DrawRectangle(prePos.x, prePos.y, config.windWidth, height);
-					pGame->getWind()->DrawRectangle(0, 500, config.windWidth, 380);
-					//w.UpdateBuffer();
-				}
-				break;
-			case 6:	//right Arrow
-				if (uprLft.x < config.windWidth - width - 10)
-				{
-					pGame->getPaddle()->uprLft.x += 30;
+	//				//w->DrawRectangle(prePos.x, prePos.y, config.windWidth, height);
+	//				pGame->getWind()->DrawRectangle(0, 500, config.windWidth, 380);
+	//				//w.UpdateBuffer();
+	//			}
+	//			break;
+	//		case 6:	//right Arrow
+	//			if (uprLft.x < config.windWidth - width - 10)
+	//			{
+	//				pGame->getPaddle()->uprLft.x += 30;
 
-					//drawing a rectangle that has the same color as the background
+	//				//drawing a rectangle that has the same color as the background
 
-					//w->DrawRectangle(prePos.x, prePos.y, config.windWidth, height);
-					pGame->getWind()->DrawRectangle(0, 500, config.windWidth, 380);
-					//w.UpdateBuffer();
-				}
-			}
-		}
+	//				//w->DrawRectangle(prePos.x, prePos.y, config.windWidth, height);
+	//				pGame->getWind()->DrawRectangle(0, 500, config.windWidth, 380);
+	//				//w.UpdateBuffer();
+	//			}
+	//		}
+	//	}
 
-		this->draw();
-		pGame->getWind()->UpdateBuffer();
-		break;
-	case widePaddel:
-		kType = pGame->getWind()->GetKeyPress(cKeyData);
+	//	this->draw();
+	//	pGame->getWind()->UpdateBuffer();
+	//	break;
+	//case widePaddel:
+	//	kType = pGame->getWind()->GetKeyPress(cKeyData);
 
-		if (kType == ARROW)
-		{
-			switch (cKeyData)
-			{
-			case 4:	//left Arrow
-				if (uprLft.x > 10)
-				{
-					pGame->getPaddle()->uprLft.x -= 15;
+	//	if (kType == ARROW)
+	//	{
+	//		switch (cKeyData)
+	//		{
+	//		case 4:	//left Arrow
+	//			if (uprLft.x > 10)
+	//			{
+	//				pGame->getPaddle()->uprLft.x -= 15;
 
-					//drawing a rectangle that has the same color as the background
+	//				//drawing a rectangle that has the same color as the background
 
-					//w->DrawRectangle(prePos.x, prePos.y, config.windWidth, height);
-					pGame->getWind()->DrawRectangle(0, 500, config.windWidth, 380);
-					//w.UpdateBuffer();
-					config.paddleWidth *= 2;
-				}
-				break;
-			case 6:	//right Arrow
-				if (uprLft.x < config.windWidth - width - 10)
-				{
-					pGame->getPaddle()->uprLft.x += 15;
+	//				//w->DrawRectangle(prePos.x, prePos.y, config.windWidth, height);
+	//				pGame->getWind()->DrawRectangle(0, 500, config.windWidth, 380);
+	//				//w.UpdateBuffer();
+	//				config.paddleWidth *= 2;
+	//			}
+	//			break;
+	//		case 6:	//right Arrow
+	//			if (uprLft.x < config.windWidth - width - 10)
+	//			{
+	//				pGame->getPaddle()->uprLft.x += 15;
 
-					//drawing a rectangle that has the same color as the background
+	//				//drawing a rectangle that has the same color as the background
 
-					//w->DrawRectangle(prePos.x, prePos.y, config.windWidth, height);
-					pGame->getWind()->DrawRectangle(0, 500, config.windWidth, 380);
-					//w.UpdateBuffer();
-					config.paddleWidth *= 2;
-				}
+	//				//w->DrawRectangle(prePos.x, prePos.y, config.windWidth, height);
+	//				pGame->getWind()->DrawRectangle(0, 500, config.windWidth, 380);
+	//				//w.UpdateBuffer();
+	//				config.paddleWidth *= 2;
+	//			}
 
-				this->draw();
-				pGame->getWind()->UpdateBuffer();
+	//			this->draw();
+	//			pGame->getWind()->UpdateBuffer();
 
-			}
-		}
+	//		}
+	//	}
 
-		break;
-	case narrowPaddel:
-		kType = pGame->getWind()->GetKeyPress(cKeyData);
+	//	break;
+	//case narrowPaddel:
+	//	kType = pGame->getWind()->GetKeyPress(cKeyData);
 
-		if (kType == ARROW)
-		{
-			switch (cKeyData)
-			{
-			case 4:	//left Arrow
-				if (uprLft.x > 10)
-				{
-					pGame->getPaddle()->uprLft.x -= 15;
+	//	if (kType == ARROW)
+	//	{
+	//		switch (cKeyData)
+	//		{
+	//		case 4:	//left Arrow
+	//			if (uprLft.x > 10)
+	//			{
+	//				pGame->getPaddle()->uprLft.x -= 15;
 
-					//drawing a rectangle that has the same color as the background
+	//				//drawing a rectangle that has the same color as the background
 
-					//w->DrawRectangle(prePos.x, prePos.y, config.windWidth, height);
-					pGame->getWind()->DrawRectangle(0, 500, config.windWidth, 380);
-					//w.UpdateBuffer();
-					config.paddleWidth /= 2;
-				}
-				break;
-			case 6:	//right Arrow
-				if (uprLft.x < config.windWidth - width - 10)
-				{
-					pGame->getPaddle()->uprLft.x += 15;
+	//				//w->DrawRectangle(prePos.x, prePos.y, config.windWidth, height);
+	//				pGame->getWind()->DrawRectangle(0, 500, config.windWidth, 380);
+	//				//w.UpdateBuffer();
+	//				config.paddleWidth /= 2;
+	//			}
+	//			break;
+	//		case 6:	//right Arrow
+	//			if (uprLft.x < config.windWidth - width - 10)
+	//			{
+	//				pGame->getPaddle()->uprLft.x += 15;
 
-					//drawing a rectangle that has the same color as the background
+	//				//drawing a rectangle that has the same color as the background
 
-					//w->DrawRectangle(prePos.x, prePos.y, config.windWidth, height);
-					pGame->getWind()->DrawRectangle(0, 500, config.windWidth, 380);
-					//w.UpdateBuffer();
-					config.paddleWidth /= 2;
-				}
+	//				//w->DrawRectangle(prePos.x, prePos.y, config.windWidth, height);
+	//				pGame->getWind()->DrawRectangle(0, 500, config.windWidth, 380);
+	//				//w.UpdateBuffer();
+	//				config.paddleWidth /= 2;
+	//			}
 
-				this->draw();
-				pGame->getWind()->UpdateBuffer();
+	//			this->draw();
+	//			pGame->getWind()->UpdateBuffer();
 
-			}
-		}
+	//		}
+	//	}
 
-		break;
-	case Quicksand:
-		kType = pGame->getWind()->GetKeyPress(cKeyData);
+	//	break;
+	//case Quicksand:
+	//	kType = pGame->getWind()->GetKeyPress(cKeyData);
 
-		if (kType == ARROW)
-		{
-			switch (cKeyData)
-			{
-			case 4:	//left Arrow
-				if (uprLft.x > 10)
-				{
-					pGame->getPaddle()->uprLft.x -= 7.5;
+	//	if (kType == ARROW)
+	//	{
+	//		switch (cKeyData)
+	//		{
+	//		case 4:	//left Arrow
+	//			if (uprLft.x > 10)
+	//			{
+	//				pGame->getPaddle()->uprLft.x -= 7.5;
 
-					//drawing a rectangle that has the same color as the background
+	//				//drawing a rectangle that has the same color as the background
 
-					//w->DrawRectangle(prePos.x, prePos.y, config.windWidth, height);
-					pGame->getWind()->DrawRectangle(0, 500, config.windWidth, 380);
-					//w.UpdateBuffer();
-					config.paddleWidth /= 2;
-				}
-				break;
-			case 6:	//right Arrow
-				if (uprLft.x < config.windWidth - width - 10)
-				{
-					pGame->getPaddle()->uprLft.x += 7.5;
+	//				//w->DrawRectangle(prePos.x, prePos.y, config.windWidth, height);
+	//				pGame->getWind()->DrawRectangle(0, 500, config.windWidth, 380);
+	//				//w.UpdateBuffer();
+	//				config.paddleWidth /= 2;
+	//			}
+	//			break;
+	//		case 6:	//right Arrow
+	//			if (uprLft.x < config.windWidth - width - 10)
+	//			{
+	//				pGame->getPaddle()->uprLft.x += 7.5;
 
-					//drawing a rectangle that has the same color as the background
+	//				//drawing a rectangle that has the same color as the background
 
-					//w->DrawRectangle(prePos.x, prePos.y, config.windWidth, height);
-					pGame->getWind()->DrawRectangle(0, 500, config.windWidth, 380);
-					//w.UpdateBuffer();
-					config.paddleWidth /= 2;
-				}
+	//				//w->DrawRectangle(prePos.x, prePos.y, config.windWidth, height);
+	//				pGame->getWind()->DrawRectangle(0, 500, config.windWidth, 380);
+	//				//w.UpdateBuffer();
+	//				config.paddleWidth /= 2;
+	//			}
 
-				this->draw();
-				pGame->getWind()->UpdateBuffer();
+	//			this->draw();
+	//			pGame->getWind()->UpdateBuffer();
 
-			}
-		}
+	//		}
+	//	}
 
-		break;
-	case ReverseDirection:
-		kType = pGame->getWind()->GetKeyPress(cKeyData);
+	//	break;
+	//case ReverseDirection:
+	//	kType = pGame->getWind()->GetKeyPress(cKeyData);
 
-		if (kType == ARROW)
-		{
-			switch (cKeyData)
-			{
-			case 6:	//left Arrow
-				if (uprLft.x > 10)
-				{
-					pGame->getPaddle()->uprLft.x -= 7.5;
+	//	if (kType == ARROW)
+	//	{
+	//		switch (cKeyData)
+	//		{
+	//		case 6:	//left Arrow
+	//			if (uprLft.x > 10)
+	//			{
+	//				pGame->getPaddle()->uprLft.x -= 7.5;
 
-					//drawing a rectangle that has the same color as the background
+	//				//drawing a rectangle that has the same color as the background
 
-					//w->DrawRectangle(prePos.x, prePos.y, config.windWidth, height);
-					pGame->getWind()->DrawRectangle(0, 500, config.windWidth, 380);
-					//w.UpdateBuffer();
-					config.paddleWidth /= 2;
-				}
-				break;
-			case 4:	//right Arrow
-				if (uprLft.x < config.windWidth - width - 10)
-				{
-					pGame->getPaddle()->uprLft.x += 7.5;
+	//				//w->DrawRectangle(prePos.x, prePos.y, config.windWidth, height);
+	//				pGame->getWind()->DrawRectangle(0, 500, config.windWidth, 380);
+	//				//w.UpdateBuffer();
+	//				config.paddleWidth /= 2;
+	//			}
+	//			break;
+	//		case 4:	//right Arrow
+	//			if (uprLft.x < config.windWidth - width - 10)
+	//			{
+	//				pGame->getPaddle()->uprLft.x += 7.5;
 
-					//drawing a rectangle that has the same color as the background
+	//				//drawing a rectangle that has the same color as the background
 
-					//w->DrawRectangle(prePos.x, prePos.y, config.windWidth, height);
-					pGame->getWind()->DrawRectangle(0, 500, config.windWidth, 380);
-					//w.UpdateBuffer();
-					config.paddleWidth /= 2;
-				}
+	//				//w->DrawRectangle(prePos.x, prePos.y, config.windWidth, height);
+	//				pGame->getWind()->DrawRectangle(0, 500, config.windWidth, 380);
+	//				//w.UpdateBuffer();
+	//				config.paddleWidth /= 2;
+	//			}
 
-				this->draw();
-				pGame->getWind()->UpdateBuffer();
+	//			this->draw();
+	//			pGame->getWind()->UpdateBuffer();
 
-			}
-		}
+	//		}
+	//	}
 
-		break;
+	//	break;
 
-	}
+	//}
 }
 
 point paddle::getPoint()

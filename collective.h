@@ -18,7 +18,7 @@ public:
 	void NewPosition();
 	void print();
 	~collective();
-	void collisionAction();//override ;
+	void collisionAction() override ;
 	void CheckCollision();
 	PowerTypes  get_type();
 };

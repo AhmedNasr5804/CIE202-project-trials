@@ -1,9 +1,8 @@
 #pragma once
 #include "collidable.h"
-#include "game.h"
 #include "gameConfig.h"
 #include "CMUgraphicsLib/auxil.h"
-#include "paddle.h"
+
 
 
 class ball : public collidable
@@ -13,9 +12,7 @@ private:
 	int radius = 10;
 	int Xinc = 5;
 	int Yinc = 5;
-	window* pWind;
 	point PrevUprL;
-	grid* grid;
 
 protected:
 	collisionData info;

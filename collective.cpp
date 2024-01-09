@@ -24,6 +24,11 @@ void collective::print()
 collective::~collective()
 {
 }
+
+void collective::collisionAction()
+{
+}
+
 void collective::CheckCollision()
 {
 

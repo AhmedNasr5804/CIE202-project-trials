@@ -5,30 +5,27 @@
 ball::ball(point r_uprleft, int r_width, int r_height, game* r_pGame) :
 	collidable(r_uprleft, r_width, r_height, r_pGame)
 {
-	pWind = pGame->getWind();
 }
 
 ball::~ball()
 {
 	pGame->getGrid()->draw();
-	pWind->SetBrush(config.bkGrndColor);
-	pWind->SetPen(config.bkGrndColor);
-	pWind->DrawCircle(config.ballrectX1 + config.ballRadius, config.ballrectY1 + config.ballRadius, config.ballRadius);
+	pGame->getWind()->SetBrush(config.bkGrndColor);
+	pGame->getWind()->SetPen(config.bkGrndColor);
+	pGame->getWind()->DrawCircle(config.ballrectX1 + config.ballRadius, config.ballrectY1 + config.ballRadius, config.ballRadius);
 }
 
 void ball::ballstart()
 {
-	grid = pGame->getGrid();
-	pWind = pGame->getWind();
-	pWind->SetBrush(config.bkGrndColor);
-	pWind->SetPen(config.bkGrndColor);
+	pGame->getWind()->SetBrush(config.bkGrndColor);
+	pGame->getWind()->SetPen(config.bkGrndColor);
 	paddle* p = pGame->getPaddle();
 
 	PrevUprL.x = config.ballrectX1 - Xinc;
 	PrevUprL.y = config.ballrectY1 + Yinc;
 
 
-	pWind->DrawCircle((PrevUprL.x + config.ballRadius), (PrevUprL.y + config.ballRadius), config.ballRadius);
+	pGame->getWind()->DrawCircle((PrevUprL.x + config.ballRadius), (PrevUprL.y + config.ballRadius), config.ballRadius);
 
 	config.ballrectX1 += Xinc;
 	config.ballrectX2 += Xinc;
@@ -37,13 +34,13 @@ void ball::ballstart()
 
 
 	if (config.ballrectY1 <= config.gridHeight + config.toolBarHeight) {
-		int rows = grid->getrows();
-		int columns = grid->getcols();
-		brick*** BricksMatrix = grid->getBrickMatrix();
+		int rows = pGame->getGrid()->getrows();
+		int columns = pGame->getGrid()->getcols();
+		brick*** BricksMatrix = pGame->getGrid()->getBrickMatrix();
 		for (int i = 0; i < rows; i++) {
 			for (int j = 0; j < columns; j++) {
 				if (checkCollision(BricksMatrix[i][j]).collision) {
-					grid->destroy(BricksMatrix[i][j]);
+					pGame->getGrid()->destroy(BricksMatrix[i][j]);
 					if (config.ballrectY1 == checkCollision(BricksMatrix[i][j]).collisionPoint.y || config.ballrectY2 == checkCollision(BricksMatrix[i][j]).collisionPoint.y) {
 						setYinc(-Yinc);
 					}
@@ -51,8 +48,8 @@ void ball::ballstart()
 						setXinc(-Xinc);
 					}
 					
-					grid->destroy(BricksMatrix[i][j]);
-					grid->draw();
+					pGame->getGrid()->destroy(BricksMatrix[i][j]);
+					pGame->getGrid()->draw();
 
 					//}
 				}
@@ -69,9 +66,9 @@ void ball::ballstart()
 
 
 	if (config.ballrectY1 >= p->getPoint().y) {
-		pWind->SetBrush(config.bkGrndColor);
-		pWind->SetPen(config.bkGrndColor);
-		pWind->DrawRectangle(0, config.paddleAreaHeight, config.windWidth, config.windHeight - config.statusBarHeight);
+		pGame->getWind()->SetBrush(config.bkGrndColor);
+		pGame->getWind()->SetPen(config.bkGrndColor);
+		pGame->getWind()->DrawRectangle(0, config.paddleAreaHeight, config.windWidth, config.windHeight - config.statusBarHeight);
 		config.ballrectX1 = (config.windWidth / 2) - (config.ballRadius);
 		config.ballrectX2 = config.ballrectX1 + config.ballRadius * 2;
 		config.ballrectY1 = config.paddleAreaHeight - config.ballRadius * 2;
@@ -81,15 +78,15 @@ void ball::ballstart()
 		p->setPoint(PP);
 		this->draw();
 		p->draw();
-		pWind->FlushKeyQueue();
+		pGame->getWind()->FlushKeyQueue();
 		keytype Q;
 		char Cha;
-		Q = pWind->WaitKeyPress(Cha);
+		Q = pGame->getWind()->WaitKeyPress(Cha);
 		if (Q == ASCII && Cha == ' ') {
 			setXinc(5);
 			setYinc(5);
-			pWind->SetBrush(config.gridLinesColor);
-			pWind->SetPen(config.gridLinesColor);
+			pGame->getWind()->SetBrush(config.gridLinesColor);
+			pGame->getWind()->SetPen(config.gridLinesColor);
 			pGame->getGrid()->draw();
 		}
 
@@ -116,18 +113,17 @@ void ball::ballstart()
 	pGame->getGrid()->draw();
 	p->draw();
 	Pause(20);
-	pWind->UpdateBuffer();
+	pGame->getWind()->UpdateBuffer();
 }
 
 void ball::balldraw()
 {
-	pWind = pGame->getWind();
-	pWind->SetPen(config.bkGrndColor);
-	pWind->SetBrush(config.bkGrndColor);
-	pWind->DrawRectangle(config.ballrectX1, config.ballrectY1, config.ballrectX2, config.ballrectY2);
-	pWind->SetPen(NAVYBLUE);
-	pWind->SetBrush(NAVYBLUE);
-	pWind->DrawCircle(config.ballrectX1 + config.ballRadius, config.ballrectY1 + config.ballRadius, config.ballRadius);
+	pGame->getWind()->SetPen(config.bkGrndColor);
+	pGame->getWind()->SetBrush(config.bkGrndColor);
+	pGame->getWind()->DrawRectangle(config.ballrectX1, config.ballrectY1, config.ballrectX2, config.ballrectY2);
+	pGame->getWind()->SetPen(NAVYBLUE);
+	pGame->getWind()->SetBrush(NAVYBLUE);
+	pGame->getWind()->DrawCircle(config.ballrectX1 + config.ballRadius, config.ballrectY1 + config.ballRadius, config.ballRadius);
 }
 
 void ball::setYinc(int y)

@@ -24,7 +24,10 @@ public:
 	int getrows()const;
 	int getcols()const;
 
-	int arethereremainingbricks();
+	/*int arethereremainingbricks();*/
+
+	void save();
+	void load();
 
 };
 

@@ -70,7 +70,7 @@ iconSave::iconSave(point r_uprleft, int r_width, int r_height, game* r_pGame) :
 
 void iconSave::onClick()
 {
-	pGame->printMessage("File Saved Successfully==> Right-Click to stop <==");
+	/*pGame->printMessage("File Saved Successfully==> Right-Click to stop <==");
 	ofstream savefile;
 	auto pGrid = pGame->getGrid();
 	savefile.open("save.txt");
@@ -92,7 +92,8 @@ void iconSave::onClick()
 		}
 	}
 	savefile.close();
-	pGame->printMessage("");
+	pGame->printMessage("");*/
+	pGame->getGrid()->save();
 
 }
 //
@@ -103,35 +104,32 @@ iconUpload::iconUpload(point r_uprleft, int r_width, int r_height, game* r_pGame
 
 void iconUpload::onClick()
 {
-	/*pGame->getGrid()->load();*/
-	pGame->printMessage("Loading File... ==> Right-Click to stop <==");
-	ifstream loadfile;
-	auto pGrid = pGame->getGrid();
-	loadfile.open("save.txt");
-	if (loadfile.is_open())
-	{
-
-		pGrid->draw();
-
-		// Load bricks from file
-		int i, j, type;
-		while (loadfile >> i >> j >> type)
-		{
-			// Add bricks to the grid
-			point uplft;
-			uplft.x = (j - 1) * config.brickWidth;
-			uplft.y = (i - 1) * config.brickHeight;
-			BrickType bt = BrickType(type);
-			pGrid->addBrick(bt, uplft);
-		}
-
-		loadfile.close();
-		pGame->printMessage("File Loaded Successfully.");
-	}
-	else
-	{
-		pGame->printMessage("Failed to open the file for loading.");
-	}
+	pGame->getGrid()->load();
+	//pGame->printMessage("Loading File... ==> Right-Click to stop <==");
+	//ifstream loadfile;
+	//auto pGrid = pGame->getGrid();
+	//loadfile.open("save.txt");
+	//if (loadfile.is_open())
+	//{
+	//	pGrid->draw();
+	//	// Load bricks from file
+	//	int i, j, type;
+	//	while (loadfile >> i >> j >> type)
+	//	{
+	//		// Add bricks to the grid
+	//		point uplft;
+	//		uplft.x = (j - 1) * config.brickWidth;
+	//		uplft.y = (i - 1) * config.brickHeight;
+	//		BrickType bt = BrickType(type);
+	//		pGrid->addBrick(bt, uplft);
+	//	}
+	//	loadfile.close();
+	//	pGame->printMessage("File Loaded Successfully.");
+	//}
+	//else
+	//{
+	//	pGame->printMessage("Failed to open the file for loading.");
+	//}
 }
 //
 ////////////////////////////////////////////////////  class Play   //////////////////////////////////////////////
